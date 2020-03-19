@@ -1,5 +1,5 @@
 {
-  "name": "react-portfolio-builder",
+  "name": "starter-kit-express",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,6 +10,7 @@
     "concurrently": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "express-rate-limit": "^5.1.1",
     "helmet": "^3.21.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.5",
