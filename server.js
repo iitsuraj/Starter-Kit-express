@@ -14,14 +14,14 @@ var secret = require("./config/secret");
 
 var port = process.env.PORT || 5000;
 // Database Connection Url
-// mongoose
-//   .connect(secret.database, { useNewUrlParser: true })
-//   .then(() => {
-//     console.log("Connected to database!");
-//   })
-//   .catch(() => {
-//     console.log("Connection failed!");
-//   });
+mongoose
+  .connect(secret.database, { useNewUrlParser: true })
+  .then(() => {
+    console.log("Connected to database!");
+  })
+  .catch(() => {
+    console.log("Connection failed!");
+  });
 
 //   Express App
 
@@ -56,6 +56,10 @@ app.get("/systeminformation", (req, res) => {
 });
 
 // Set Api
+
+var User = require("./routes/api/user");
+
+app.use("/", User);
 
 // Server static assets if in production
 // if (process.env.NODE_ENV === "production") {

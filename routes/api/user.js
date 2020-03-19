@@ -3,7 +3,7 @@ var User = require("../../models/user");
 var jwt = require("jsonwebtoken");
 var secret = require("../../config/secret");
 var passport = require("passport");
-
+var Roles = require("../../misc/basic-role");
 // Load Input ValidationInput
 var registerIputValidation = require("../../validation/register");
 var loginIputValidation = require("../../validation/login");
@@ -103,6 +103,7 @@ router.get(
   passport.authenticate("jwt", {
     session: false
   }),
+  Roles.isAdmin,
   function(req, res, next) {
     res.json({
       message: "You are Login"

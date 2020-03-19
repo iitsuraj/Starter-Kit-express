@@ -7,7 +7,7 @@ var secretKey = require("../config/secret");
 
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = "dfd";
+opts.secretOrKey = secretKey.secretKey;
 module.exports = function(passport) {
   passport.use(
     new JwtStrategy(opts, function(jwt_payload, done) {

@@ -34,7 +34,7 @@ const demoLogger = (req, res, next) => {
   )} time - ${current_datetime} user_agent - ${req.get(
     "user-agent"
   )} ${durationInMilliseconds.toLocaleString()} ms`;
-  console.log(log);
+  // console.log(log);
   fs.appendFile("request_logs.txt", log + "\n", err => {
     if (err) {
       console.log(err);
