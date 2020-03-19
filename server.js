@@ -11,7 +11,8 @@ var compression = require("compression");
 var logger = require("./misc/logger");
 var isEmpty = require("./validation/is-empty");
 var secret = require("./config/secret");
-var port = 5000;
+
+var port = process.env.PORT || 5000;
 // Database Connection Url
 // mongoose
 //   .connect(secret.database, { useNewUrlParser: true })
@@ -66,6 +67,6 @@ app.get("/systeminformation", (req, res) => {
 //   });
 // }
 
-app.listen(5000, () => {
-  console.log("port 5000");
+app.listen(port, () => {
+  console.log(`port ${port}`);
 });
