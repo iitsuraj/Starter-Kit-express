@@ -1,5 +1,4 @@
-const fs = require("fs");
-
+var Looger = require("../models/logger");
 const getActualRequestDurationInMilliseconds = start => {
   const NS_PER_SEC = 1e9; //  convert to nanoseconds
   const NS_TO_MS = 1e6; // convert to milliseconds
@@ -8,39 +7,18 @@ const getActualRequestDurationInMilliseconds = start => {
 };
 
 const demoLogger = (req, res, next) => {
-  //middleware function
-  let current_datetime = new Date();
-  let formatted_date =
-    current_datetime.getFullYear() +
-    "-" +
-    (current_datetime.getMonth() + 1) +
-    "-" +
-    current_datetime.getDate() +
-    " " +
-    current_datetime.getHours() +
-    ":" +
-    current_datetime.getMinutes() +
-    ":" +
-    current_datetime.getSeconds();
-  let method = req.method;
-  let url = req.url;
-  let status = res.statusCode;
   const start = process.hrtime();
   const durationInMilliseconds = getActualRequestDurationInMilliseconds(start);
-  let log = `[${formatted_date}] ${method}:${url} ${status} host - ${
-    req.hostname
-  } ip - ${req.ip} referrer - ${req.header(
-    "Referer"
-  )} time - ${current_datetime} user_agent - ${req.get(
-    "user-agent"
-  )} ${durationInMilliseconds.toLocaleString()} ms`;
-  // console.log(log);
-  fs.appendFile("request_logs.txt", log + "\n", err => {
-    if (err) {
-      console.log(err);
-    }
-  });
-  next();
+  var LoogerFields = {};
+  LoogerFields.visitorip = req.ip;
+  LoogerFields.host = req.hostname;
+  LoogerFields.url = req.url;
+  LoogerFields.method = req.method;
+  LoogerFields.status = res.statusCode;
+  LoogerFields.referrer = req.header("Referer");
+  LoogerFields.useragent = req.get("user-agent");
+  LoogerFields.durationInMilliseconds = durationInMilliseconds.toLocaleString();
+  new Looger(LoogerFields).save().then(next());
 };
 
 module.exports = demoLogger;
