@@ -57,8 +57,11 @@ app.get("/systeminformation", (req, res) => {
 
 // Set Api
 
+var notificationSubscriber = require("./routes/api/notification-subscribe");
+app.use("/", notificationSubscriber);
+var notificationSender = require("./routes/api/notification-sender");
+app.use("/", notificationSender);
 var User = require("./routes/api/user");
-
 app.use("/", User);
 
 // Server static assets if in production
