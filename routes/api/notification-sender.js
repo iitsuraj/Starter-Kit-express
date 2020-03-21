@@ -9,7 +9,7 @@ router.post("/push-notification-all", function(req, res) {
     title: req.body.title,
     message: req.body.message,
     url: req.body.url,
-    ttl: req.body.ttl,
+    ttl: 3600,
     icon: req.body.icon,
     image: req.body.image,
     badge: req.body.badge,
@@ -26,7 +26,7 @@ router.post("/push-notification-all", function(req, res) {
         pusher.sendPushNotification(subscription, payload);
       });
       q.allSettled(parallelSubscriptionCalls).then(function(pushResults) {
-        // console.info(pushResults);
+        console.info(pushResults);
       });
       res.json({
         data: "Push triggered"

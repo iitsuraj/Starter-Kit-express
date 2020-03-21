@@ -18,7 +18,7 @@ module.exports = {
       var pushPayload = JSON.stringify(payload);
       var pushOptions = {
         vapidDetails: {
-          subject: "http://localhost:3000",
+          subject: "Testing Push Notifications",
           privateKey: "UG9tl4mE8d57PsaGk4bEKkUZU4Xp09m-H6rp1JZKCFI",
           publicKey:
             "BMiBp3lvCa9hJurodtvtZqavPnBMg1j33o4rxV_pm8J5c6NGVAVoLpHahJoqi88zyqmTZsGsZdqrqlPe8Enehog"

@@ -15,7 +15,7 @@ function urlB64ToUint8Array(e) {
 
 function saveSubscription(e) {
   let r = new XMLHttpRequest();
-  r.open("POST", "http://localhost:5000/push-subscribe"),
+  r.open("POST", "/push-subscribe"),
     r.setRequestHeader("Content-Type", "application/json;charset=UTF-8"),
     (r.onreadystatechange = function() {
       4 == r.readyState &&

@@ -63,7 +63,10 @@ var notificationSender = require("./routes/api/notification-sender");
 app.use("/", notificationSender);
 var User = require("./routes/api/user");
 app.use("/", User);
-
+app.use(express.static("demo-push-notification"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "demo-push-notification", "index.html"));
+});
 // Server static assets if in production
 // if (process.env.NODE_ENV === "production") {
 //   // Set static folder
