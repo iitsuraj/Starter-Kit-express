@@ -18,7 +18,12 @@ const demoLogger = (req, res, next) => {
   LoogerFields.referrer = req.header("Referer");
   LoogerFields.useragent = req.get("user-agent");
   LoogerFields.durationInMilliseconds = durationInMilliseconds.toLocaleString();
-  new Looger(LoogerFields).save().then(next());
+  new Looger(LoogerFields)
+    .save()
+    .then(next())
+    .catch(err => {
+      res.status(500);
+    });
 };
 
 module.exports = demoLogger;

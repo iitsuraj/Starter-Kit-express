@@ -1,12 +1,6 @@
 var webPush = require("web-push");
-// const vapidKeys = webPush.generateVAPIDKeys();
-// webPush.setVapidDetails(
-//   "mailto:example@yourdomain.org",
-//   vapidKeys.publicKey,
-//   vapidKeys.privateKey
-// );
 module.exports = {
-  sendPushNotification(subscription, payload) {
+  sendPushNotification(subscription, payload, keys) {
     return new Promise(function(resolve, reject) {
       var pushSubscription = {
         endpoint: subscription.endpoint,
@@ -18,10 +12,9 @@ module.exports = {
       var pushPayload = JSON.stringify(payload);
       var pushOptions = {
         vapidDetails: {
-          subject: "Testing Push Notifications",
-          privateKey: "UG9tl4mE8d57PsaGk4bEKkUZU4Xp09m-H6rp1JZKCFI",
-          publicKey:
-            "BMiBp3lvCa9hJurodtvtZqavPnBMg1j33o4rxV_pm8J5c6NGVAVoLpHahJoqi88zyqmTZsGsZdqrqlPe8Enehog"
+          subject: "https://iitsuraj.github.io",
+          privateKey: keys.pushNotificationPrivateKey,
+          publicKey: keys.pushNotificationPublicKey
         },
         TTL: payload.ttl,
         headers: {}
@@ -38,7 +31,7 @@ module.exports = {
         .catch(function(err) {
           reject({
             status: false,
-            endpoint: subscription.endpoint,
+            id: subscription._id,
             data: err
           });
         });

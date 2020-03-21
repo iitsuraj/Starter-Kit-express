@@ -3,13 +3,14 @@ var router = express.Router();
 var q = require("q");
 var Subscriber = require("../../models/push_subscriber");
 var pusher = require("../../misc/pusher");
+var keys = require("../../config/secret");
 
 router.post("/push-notification-all", function(req, res) {
   var payload = {
     title: req.body.title,
     message: req.body.message,
     url: req.body.url,
-    ttl: 3600,
+    ttl: 1000,
     icon: req.body.icon,
     image: req.body.image,
     badge: req.body.badge,
@@ -23,11 +24,17 @@ router.post("/push-notification-all", function(req, res) {
       });
     } else {
       let parallelSubscriptionCalls = subscriptions.map(function(subscription) {
-        pusher.sendPushNotification(subscription, payload);
+        pusher.sendPushNotification(subscription, payload, keys).catch(err => {
+          Subscriber.findByIdAndDelete({ _id: err.id }).exec();
+        });
       });
-      q.allSettled(parallelSubscriptionCalls).then(function(pushResults) {
-        console.info(pushResults);
-      });
+      q.allSettled(parallelSubscriptionCalls)
+        .then(function(pushResults) {
+          // console.info(pushResults);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
       res.json({
         data: "Push triggered"
       });

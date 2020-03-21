@@ -10,7 +10,8 @@ self.addEventListener("push", function(event) {
       body: _data.message,
       icon: _data.icon,
       tag: _data.tag,
-      vibrate: [300, 100, 400]
+      vibrate: [100, 50, 100],
+      image: _data.image
     })
   );
 });
