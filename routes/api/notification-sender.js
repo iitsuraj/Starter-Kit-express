@@ -7,6 +7,7 @@ var User = require("../../models/user");
 var pusher = require("../../misc/pusher");
 var keys = require("../../config/secret");
 var mailer = require("../../misc/mailer");
+var sms = require("../../misc/sms");
 router.post("/push-notification-all", function(req, res) {
   var payload = {
     title: req.body.title,
@@ -82,6 +83,13 @@ router.post("/email-notification-all", function(req, res) {
       });
     }
   });
+});
+
+router.post("/sms-notification-all", function(req, res) {
+  sms
+    .sendSms(req.body.from, req.body.to, req.body.msg)
+    .then(data => res.json(data))
+    .catch(err => console.log(err));
 });
 
 module.exports = router;
