@@ -1,3 +1,5 @@
+// importScripts("http://localhost:5000/x.js");
+
 let notificationUrl = "";
 //notification registered feature for getting update automatically from server api
 self.addEventListener("push", function(event) {
@@ -15,7 +17,6 @@ self.addEventListener("push", function(event) {
     })
   );
 });
-
 //notification url redirect event click
 self.addEventListener("notificationclick", function(event) {
   event.notification.close();
