@@ -11,9 +11,9 @@
     Sms - Notification added to misc/sms.js
     )
 5.  Cron - Job (Every Day Backup) mongodump --uri "mongodb://usersname:password@127.0.0.1:27100/dbname?replicaSet=replica_name&authSource=admin" --out "C:\Umesh"
-6.  Monitoring UI ✅ (http://localhoat:5000/appmetrics-dash)
-7.  Reverse Proxy
-8.  Utilize all CPU cores
+6.  Monitoring UI ✅ (http://localhoat:5000/appmetrics-dash) (DONT USE)
+7.  Reverse Proxy ✅ (Nginx)
+8.  Utilize all CPU cores ✅ (pm2 start server.js i "max")
 9.  Use Lodash Over
 
 ---
